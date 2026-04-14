@@ -13,39 +13,19 @@ const Layout = () => {
   const { data: session, isPending } = authClient.useSession();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const userRole = (session?.user?.role as Role) || "patient";
+  const userRole = (session?.user?.role as Role) || "admin";
 
   useEffect(() => {
-    if (isPending) return;
-
-    // 2. Find configuration for current path
-    // We combine all arrays to search through everything
-    const allNavItems = [...navConfig.navMain];
-    const currentRouteConfig = getRouteConfig(pathname, allNavItems);
-
-    // 3. Check Permissions
-    if (currentRouteConfig) {
-      const hasAccess = currentRouteConfig.allowedRoles.includes(userRole);
-
-      if (!hasAccess) {
-        toast.error("Unauthorized Access");
-        // Redirect to a safe page based on role, or just dashboard
-        navigate("/dashboard", { replace: true });
-      }
-    }
+    // Auth checks disabled for preview
   }, [pathname, userRole, isPending, navigate]);
 
   if (isPending) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader label="Initializing Medflolw..." />
-      </div>
-    );
+    // Skip auth pending in dev preview mode
   }
 
-  if (!session) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!session) {
+  //   return <Navigate to="/login" replace />;
+  // }
   return (
     <SidebarProvider>
       <AppSidebar />

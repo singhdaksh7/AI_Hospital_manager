@@ -1,18 +1,31 @@
-import { Button } from "@/components/ui/button";
-
+import { Navigate } from "react-router";
+import { authClient } from "@/lib/auth-client";
 import type { Route } from "./+types/home";
+import Loader from "@/components/global/Loader";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Hospital Management System" },
+    { name: "description", content: "AI-Powered Realtime Hospital Management" },
   ];
 }
 
 export default function Home() {
-  return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
-  );
+  const { data: session, isPending } = authClient.useSession();
+
+  if (isPending) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Loader label="Loading..." />
+      </div>
+    );
+  }
+
+  // If user is logged in, redirect to dashboard
+  if (session) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  // If user is not logged in, redirect to login
+  return <Navigate to="/login" replace />;
 }

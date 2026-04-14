@@ -18,6 +18,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.6.3",
     "@better-auth/mongo-adapter": "^1.5.3",
     "@google/generative-ai": "^0.24.1",
     "@polar-sh/better-auth": "^1.8.3",
@@ -30,12 +31,16 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
+    "drizzle-kit": "^0.31.10",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "inngest": "^3.52.6",
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.4",
     "morgan": "^1.10.1",
+    "pg": "^8.20.0",
+    "postgres": "^3.4.9",
     "socket.io": "^4.8.3",
     "uploadthing": "^7.7.4"
   }
