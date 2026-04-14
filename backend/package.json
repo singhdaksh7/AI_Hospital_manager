@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "start": "bun run src/server.ts",
     "watch": "bun --watch index.ts",
     "start:ngrok": "ngrok http 5000",
     "start:inngest": "npx inngest-cli@latest dev",
